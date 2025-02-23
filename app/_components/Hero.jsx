@@ -22,7 +22,7 @@ const Hero = () => {
 
 				<div className="flex items-center justify-center">
 					<Image
-						src={"/pc2.jpg"}
+						src={"/pc2.webp"}
 						alt="PC"
 						width={300}
 						height={300}
