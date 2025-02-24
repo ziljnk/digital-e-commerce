@@ -7,17 +7,17 @@ import axios from "axios";
 function Provider({ children }) {
 	const { user } = useUser();
 
-	// useEffect(() => {
-	// 	user && checkIsNewUser();
-	// }, [user]);
+	useEffect(() => {
+		user && checkIsNewUser();
+	}, [user]);
 
-	// const checkIsNewUser = async () => {
-	// 	const result = await axios.post("/api/user", {
-	// 		user: user,
-	// 	});
+	const checkIsNewUser = async () => {
+		const result = await axios.post("/api/user", {
+			user: user,
+		});
 
-	// 	console.log(result.data);
-	// };
+		console.log(result.data);
+	};
 
 	return (
 		<div>

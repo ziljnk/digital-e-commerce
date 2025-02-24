@@ -7,6 +7,8 @@ const ImageUpload = ({ onImageSelect }) => {
 	const [image, setImage] = useState();
 	const handleFileChange = (event) => {
 		onImageSelect(event);
+		console.log(event);
+
 		const file = event.target.files[0];
 		const render = new FileReader();
 		render.onloadend = () => {

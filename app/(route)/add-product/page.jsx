@@ -1,9 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import ImageUpload from "./_components/ImageUpload.jsx";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import axios from "axios";
+import { useUser } from "@clerk/nextjs";
+import { Loader2Icon } from "lucide-react";
+import { useRouter } from "next/navigation.js";
+import { toast } from "sonner";
 
 const AddProduct = () => {
 	const categoryOption = [
@@ -18,6 +30,14 @@ const AddProduct = () => {
 		"Other",
 	];
 	const [formData, setFormData] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const router = useRouter();
+	const { user } = useUser();
+	useEffect(() => {
+		setFormData({
+			userEmail: user?.primaryEmailAddress?.emailAddress,
+		});
+	}, [user]);
 	const handleInputChange = (fieldName, fieldValue) => {
 		setFormData((prev) => ({
 			...prev,
@@ -26,6 +46,7 @@ const AddProduct = () => {
 		console.log(formData);
 	};
 	const onAddProductBtnClick = async () => {
+		setLoading(true);
 		const formDataObject = new FormData();
 		formDataObject.append("image", formData.image);
 		formDataObject.append("file", formData.file);
@@ -35,7 +56,12 @@ const AddProduct = () => {
 			"Content-Type": "multiport/form-data",
 		});
 
-		console.log(result);
+		setLoading(false);
+		console.log("result", result);
+		if (result.status === 200) {
+			toast.success("Product Added Successfully!");
+			router.push("/dashboard");
+		}
 	};
 
 	return (
@@ -65,8 +91,7 @@ const AddProduct = () => {
 					</div>
 					<div>
 						<h4>Message to User</h4>
-						<textarea
-							className="border"
+						<Textarea
 							name="message"
 							placeholder="Write Thank You Message To User"
 							onChange={(e) =>
@@ -99,27 +124,26 @@ const AddProduct = () => {
 					</div>
 					<div>
 						<h4>Category</h4>
-						<select
-							// onChange={(value) =>
-							// 	handleInputChange("category", value)
-							// }
-							className="border"
-							name="category"
-							id="category">
-							<option>Select category</option>
-							{categoryOption.map((category, index) => (
-								<option
-									key={index}
-									value={category}>
-									{category}
-								</option>
-							))}
-						</select>
+						<Select
+							onValueChange={(value) =>
+								handleInputChange("category", value)
+							}
+						>
+							<SelectTrigger className="w-[180px]">
+								<SelectValue placeholder="Select Category" />
+							</SelectTrigger>
+							<SelectContent>
+								{categoryOption.map((category, index) => (
+									<SelectItem key={index} value={category}>
+										{category}
+									</SelectItem>
+								))}
+							</SelectContent>
+						</Select>
 					</div>
 					<div>
 						<h4>Description</h4>
-						<textarea
-							className="border"
+						<Textarea
 							name="description"
 							placeholder="Add product description"
 							onChange={(e) =>
@@ -129,8 +153,7 @@ const AddProduct = () => {
 					</div>
 					<div>
 						<h4>About Product (Optional)</h4>
-						<textarea
-							className="border"
+						<Textarea
 							name="about"
 							id="about-product"
 							placeholder="Add product Information"
@@ -139,7 +162,13 @@ const AddProduct = () => {
 							}
 						/>
 					</div>
-					<Button onClick={onAddProductBtnClick}>Add Product</Button>
+					<Button onClick={onAddProductBtnClick} disabled={loading}>
+						{loading ? (
+							<Loader2Icon className="animate-spin" />
+						) : (
+							"Add Product"
+						)}
+					</Button>
 				</div>
 			</div>
 		</div>

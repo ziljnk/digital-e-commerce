@@ -8,14 +8,14 @@ import { getStorage } from "firebase/storage";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-	authDomain: "business-project-f16b5.firebaseapp.com",
-	projectId: "business-project-f16b5",
-	storageBucket: "business-project-f16b5.firebasestorage.app",
-	messagingSenderId: "915863919586",
-	appId: "1:915863919586:web:97039426006591ef5f77bb",
-	measurementId: "G-9PCVDMTD8Y",
+	authDomain: "seminar-d43fa.firebaseapp.com",
+	projectId: "seminar-d43fa",
+	storageBucket: "seminar-d43fa.appspot.com",
+	messagingSenderId: "834148476412",
+	appId: "1:834148476412:web:b117388137086aa6d13e79",
+	measurementId: "G-C3JTWES8WZ",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const storage = getStorage(app)
+export const storage = getStorage(app);

@@ -1,10 +1,29 @@
 "use client";
+import ProductCardItem from "@/app/_components/ProductCardItem";
 import { Button } from "@/components/ui/button";
+import { useUser } from "@clerk/nextjs";
+import axios from "axios";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function UserListing() {
 	const [listing, setListing] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const { user } = useUser();
+
+	useEffect(() => {
+		user && getUserProductList();
+	}, [user]);
+
+	const getUserProductList = async () => {
+		setLoading(true);
+		const { data } = await axios.get(
+			"/api/products?email=" + user?.primaryEmailAddress?.emailAddress
+		);
+		console.log(data);
+		setLoading(false);
+		setListing(data.result);
+	};
 
 	return (
 		<div className="mt-5">
@@ -21,6 +40,12 @@ function UserListing() {
 						No Listing Found.
 					</h2>
 				)}
+
+				<div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 mt-5">
+					{listing.map((product, index) => (
+						<ProductCardItem key={index} product={product} />
+					))}
+				</div>
 			</div>
 		</div>
 	);
