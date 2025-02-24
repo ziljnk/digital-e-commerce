@@ -12,7 +12,7 @@ const Dashboard = () => {
 					<TabsTrigger value="purchased">Purchased</TabsTrigger>
 				</TabsList>
 				<TabsContent value="listing">
-					{/* <UserListing /> */}
+					<UserListing />
 				</TabsContent>
 				<TabsContent value="purchased">
 					Change your password here.

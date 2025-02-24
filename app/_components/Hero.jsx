@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
+import Link from 'next/link';
 import React from 'react'
 
 const Hero = () => {
@@ -14,9 +15,11 @@ const Hero = () => {
 						Join a growing family of 43,436 designers, creators, and
 						makers from all around the world
 					</p>
-					<div className='flex gap-5 mt-8'>
+					<div className="flex gap-5 mt-8">
 						<Button>Explore</Button>
-						<Button className='bg-red-500'>Sell</Button>
+						<Link href={"/dashboard"}>
+							<Button className="bg-red-500">Sell</Button>
+						</Link>
 					</div>
 				</div>
 
