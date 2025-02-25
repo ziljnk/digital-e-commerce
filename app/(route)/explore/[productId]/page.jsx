@@ -61,15 +61,11 @@ const ProductDetail = () => {
 							register email id once you purchase this digital
 							content.
 						</p>
-						<Button
-							className="w-full"
-							size="lg">
+						<Button className="w-full" size="lg">
 							Add to cart
 						</Button>
 
-						<Accordion
-							type="single"
-							collapsible>
+						<Accordion type="single" collapsible>
 							<AccordionItem value="item-1">
 								<AccordionTrigger>Description</AccordionTrigger>
 								<AccordionContent>

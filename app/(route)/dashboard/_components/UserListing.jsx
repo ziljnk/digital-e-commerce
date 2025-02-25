@@ -18,12 +18,12 @@ function UserListing() {
 	}, [user]);
 
 	const getUserProductList = async () => {
-		setLoading(true);
+		// setLoading(true);
 		// const { data } = await axios.get(
 		// 	"/api/products?email=" + user?.primaryEmailAddress?.emailAddress
 		// );
 		// console.log(data);
-		setLoading(false);
+		// setLoading(false);
 		// setListing(data.result);
 		setListing(productList);
 	};

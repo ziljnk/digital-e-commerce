@@ -11,13 +11,13 @@ const ProductsList = () => {
 
 	useEffect(() => {
 		setProductList(Products);
-		// getProductList()
+		// getProductList();
 	}, []);
 
 	const getProductList = async () => {
 		const result = await axios.get("/api/products?limit=9");
-		console.log(result);
-		setProductList(result.data);
+		console.log(result.data);
+		setProductList(result.data.result);
 	};
 
 	return (
