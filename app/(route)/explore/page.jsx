@@ -65,7 +65,8 @@ const Explore = () => {
 						onClick={() => {
 							getProductList(0);
 							setProductList([]);
-						}}>
+						}}
+					>
 						<SearchIcon /> Search
 					</Button>
 				</div>
