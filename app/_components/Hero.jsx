@@ -1,10 +1,10 @@
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import Link from 'next/link';
-import React from 'react'
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 const Hero = () => {
-    return (
+	return (
 		<div className="bg-green-700 p-10 px-28 lg:px-36 ">
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-20">
 				<div>
@@ -16,9 +16,15 @@ const Hero = () => {
 						makers from all around the world
 					</p>
 					<div className="flex gap-5 mt-8">
-						<Button>Explore</Button>
+						<Link href={"/explore"}>
+							<Button size="lg">Explore</Button>
+						</Link>
 						<Link href={"/dashboard"}>
-							<Button className="bg-red-500">Sell</Button>
+							<Button
+								size="lg"
+								className="bg-red-500">
+								Sell
+							</Button>
 						</Link>
 					</div>
 				</div>
@@ -35,6 +41,6 @@ const Hero = () => {
 			</div>
 		</div>
 	);
-}
+};
 
-export default Hero
+export default Hero;

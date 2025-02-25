@@ -1,5 +1,6 @@
 "use client";
 import ProductCardItem from "@/app/_components/ProductCardItem";
+import Products from "@/app/_mockData/Products";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
@@ -10,6 +11,7 @@ function UserListing() {
 	const [listing, setListing] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const { user } = useUser();
+	const productList = Products;
 
 	useEffect(() => {
 		user && getUserProductList();
@@ -17,12 +19,13 @@ function UserListing() {
 
 	const getUserProductList = async () => {
 		setLoading(true);
-		const { data } = await axios.get(
-			"/api/products?email=" + user?.primaryEmailAddress?.emailAddress
-		);
-		console.log(data);
+		// const { data } = await axios.get(
+		// 	"/api/products?email=" + user?.primaryEmailAddress?.emailAddress
+		// );
+		// console.log(data);
 		setLoading(false);
-		setListing(data.result);
+		// setListing(data.result);
+		setListing(productList);
 	};
 
 	return (
@@ -43,7 +46,11 @@ function UserListing() {
 
 				<div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 mt-5">
 					{listing.map((product, index) => (
-						<ProductCardItem key={index} product={product} />
+						<ProductCardItem
+							key={index}
+							product={product}
+							editable={true}
+						/>
 					))}
 				</div>
 			</div>
