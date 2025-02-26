@@ -14,6 +14,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
+import AddToCartBtn from "@/app/_components/AddToCartBtn.jsx";
 
 const ProductDetail = () => {
 	const { productId } = useParams();
@@ -61,11 +62,14 @@ const ProductDetail = () => {
 							register email id once you purchase this digital
 							content.
 						</p>
-						<Button className="w-full" size="lg">
-							Add to cart
-						</Button>
+						<AddToCartBtn
+							size="lg"
+							product={productDetail}
+						/>
 
-						<Accordion type="single" collapsible>
+						<Accordion
+							type="single"
+							collapsible>
 							<AccordionItem value="item-1">
 								<AccordionTrigger>Description</AccordionTrigger>
 								<AccordionContent>
@@ -84,8 +88,8 @@ const ProductDetail = () => {
 					</div>
 				</div>
 
-				<div>
-					<SimilarProduct />
+				<div className="mt-10">
+					<SimilarProduct category={productDetail.category} />
 				</div>
 			</div>
 		)

@@ -1,6 +1,6 @@
 import React from "react";
 
-const SimilarProduct = () => {
+const SimilarProduct = ({ category }) => {
 	return <div>SimilarProduct</div>;
 };
 

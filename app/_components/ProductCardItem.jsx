@@ -1,12 +1,10 @@
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { MoreVerticalIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import ProductEditableOption from "@/app/_components/ProductEditableOption.jsx";
 import Link from "next/link";
+import AddToCartBtn from "./AddToCartBtn.jsx";
 
-const ProductCardItem = ({ product, editable = false }) => {
+const ProductCardItem = ({ product, editable = false, user }) => {
 	return (
 		product && (
 			<Link href={`/explore/${product?.id}`}>
@@ -39,17 +37,10 @@ const ProductCardItem = ({ product, editable = false }) => {
 								</h2>
 							</div>
 
-							{!editable ? (
-								<Button
-									size="sm"
-									className="mt-1">
-									Add to Cart
-								</Button>
-							) : (
-								<ProductEditableOption>
-									<MoreVerticalIcon />
-								</ProductEditableOption>
-							)}
+							<AddToCartBtn
+								editable={editable}
+								product={product}
+							/>
 						</div>
 					</div>
 				</Card>

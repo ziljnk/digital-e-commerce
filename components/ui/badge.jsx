@@ -8,7 +8,8 @@ const badgeVariants = cva(
 	{
 		variants: {
 			variant: {
-				default: "bg-primary text-black shadow hover:bg-primary/80",
+				default:
+					"border-transparent bg-primary text-white shadow hover:bg-primary/80",
 				secondary:
 					"border-transparent bg-secondary text-black hover:bg-secondary/80",
 				destructive:
@@ -24,7 +25,10 @@ const badgeVariants = cva(
 
 function Badge({ className, variant, ...props }) {
 	return (
-		<div className={cn(badgeVariants({ variant }), className)} {...props} />
+		<div
+			className={cn(badgeVariants({ variant }), className)}
+			{...props}
+		/>
 	);
 }
 

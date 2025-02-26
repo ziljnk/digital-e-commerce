@@ -1,7 +1,10 @@
 import React from "react";
 import ProductCardItem from "./ProductCardItem";
+import { useUser } from "@clerk/nextjs";
 
 const DisplayProductList = ({ productList }) => {
+	const user = useUser();
+
 	return (
 		<div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 mt-5">
 			{productList.length > 0
@@ -9,6 +12,7 @@ const DisplayProductList = ({ productList }) => {
 						<ProductCardItem
 							product={product}
 							key={index}
+							user={user}
 						/>
 				  ))
 				: [1, 2, 3, 4, 5, 6].map((_, index) => (

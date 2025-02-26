@@ -8,7 +8,7 @@ export const usersTable = pgTable("users", {
 });
 
 export const productsTable = pgTable("products", {
-	id: serial().primaryKey(),
+	id: integer().primaryKey().generatedAlwaysAsIdentity(),
 	title: varchar().notNull(),
 	price: integer().notNull(),
 	description: text().notNull(),
@@ -20,4 +20,14 @@ export const productsTable = pgTable("products", {
 	createdBy: varchar("createdBy")
 		.notNull()
 		.references(() => usersTable.email),
+});
+
+export const cartTable = pgTable("cart", {
+	id: integer().primaryKey().generatedAlwaysAsIdentity(),
+	email: varchar("email")
+		.notNull()
+		.references(() => usersTable.email),
+	productId: integer("productId")
+		.notNull()
+		.references(() => productsTable.id),
 });
