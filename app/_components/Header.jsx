@@ -31,9 +31,7 @@ function Header() {
 
 			<ul className="hidden md:flex gap-5 px-2 p-1">
 				{menuList.map((menu, index) => (
-					<Link
-						href={menu.path}
-						key={index}>
+					<Link href={menu.path} key={index}>
 						<li className=" px-2 p-1 cursor-pointer hover:border-2 hover:border-white">
 							{menu.name}
 						</li>
@@ -45,9 +43,7 @@ function Header() {
 				<CartList>
 					<div className="flex items-center">
 						<ShoppingBag />
-						<Badge className="bg-black">
-							3 {/*{cart.length}*/}
-						</Badge>
+						<Badge className="bg-black">{cart.length}</Badge>
 					</div>
 				</CartList>
 				<Link href={"/dashboard"}>

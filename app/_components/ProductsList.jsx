@@ -10,8 +10,8 @@ const ProductsList = () => {
 	const [productList, setProductList] = useState([]);
 
 	useEffect(() => {
-		setProductList(Products);
-		// getProductList();
+		// setProductList(Products);
+		getProductList();
 	}, []);
 
 	const getProductList = async () => {

@@ -20,16 +20,16 @@ const Explore = () => {
 	});
 
 	useEffect(() => {
-		// getProductList(offset);
-		setProductList(Products);
+		getProductList(offset);
+		// setProductList(Products);
 	}, []);
 
-	// useEffect(() => {
-	// 	if (sort) {
-	// 		setProductList([]);
-	// 		getProductList(0);
-	// 	}
-	// }, [sort]);
+	useEffect(() => {
+		if (sort) {
+			setProductList([]);
+			getProductList(0);
+		}
+	}, [sort]);
 
 	const getProductList = async (offset_) => {
 		const result = await axios.post("/api/all-products", {

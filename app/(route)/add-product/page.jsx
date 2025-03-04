@@ -43,7 +43,6 @@ const AddProduct = () => {
 			...prev,
 			[fieldName]: fieldValue,
 		}));
-		console.log(formData);
 	};
 	const onAddProductBtnClick = async () => {
 		setLoading(true);

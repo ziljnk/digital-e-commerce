@@ -6,7 +6,7 @@ import { toast } from "sonner";
 const RemoveFromCart = ({ product }) => {
 	const { cart, setCart } = useContext(CartContext);
 	const removeItem = async () => {
-		// const result = await axios.delete("/api/cart?recordId=" + product?.id);
+		const result = await axios.delete("/api/cart?recordId=" + product?.id);
 		toast.success("Item removed");
 
 		const cartList = cart.filter((cartItem) => cartItem.id !== product.id);
@@ -15,7 +15,8 @@ const RemoveFromCart = ({ product }) => {
 	return (
 		<h2
 			className="text-red-500 cursor-pointer"
-			onClick={() => removeItem()}>
+			onClick={() => removeItem()}
+		>
 			Remove
 		</h2>
 	);

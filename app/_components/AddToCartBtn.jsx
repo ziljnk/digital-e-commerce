@@ -4,8 +4,10 @@ import ProductEditableOption from "./ProductEditableOption";
 import { MoreVerticalIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartContext } from "../_context/CartContext";
+import { useUser } from "@clerk/nextjs";
 
 const AddToCartBtn = ({ editable, size = "sm", product }) => {
+	const { user } = useUser();
 	const { cart, setCart } = useContext(CartContext);
 	const [loading, setLoading] = useState(false);
 	const addToCart = async () => {
@@ -21,19 +23,19 @@ const AddToCartBtn = ({ editable, size = "sm", product }) => {
 	};
 	return (
 		<div>
-			{!editable ? (
+			{!editable ?
 				<Button
 					disabled={loading}
 					onClick={() => addToCart()}
 					size={size}
-					className="mt-1 w-full">
+					className="mt-1 w-full"
+				>
 					Add to Cart
 				</Button>
-			) : (
-				<ProductEditableOption>
+			:	<ProductEditableOption product={product}>
 					<MoreVerticalIcon />
 				</ProductEditableOption>
-			)}
+			}
 		</div>
 	);
 };

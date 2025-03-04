@@ -26,7 +26,7 @@ const ProductDetail = () => {
 	};
 
 	useEffect(() => {
-		// getProductDetail()
+		getProductDetail();
 	}, []);
 
 	return (
@@ -62,14 +62,9 @@ const ProductDetail = () => {
 							register email id once you purchase this digital
 							content.
 						</p>
-						<AddToCartBtn
-							size="lg"
-							product={productDetail}
-						/>
+						<AddToCartBtn size="lg" product={productDetail} />
 
-						<Accordion
-							type="single"
-							collapsible>
+						<Accordion type="single" collapsible>
 							<AccordionItem value="item-1">
 								<AccordionTrigger>Description</AccordionTrigger>
 								<AccordionContent>

@@ -19,7 +19,7 @@ export async function POST(req) {
 				usersTable,
 				eq(productsTable.createdBy, usersTable.email)
 			)
-			.where(like(productsTable.title, "%" + searchText + "%"))
+			// .where(like(productsTable.title, "%" + searchText + "%"))
 			.orderBy(
 				sort.order === "desc"
 					? desc(productsTable[sort.field])

@@ -18,14 +18,14 @@ function UserListing() {
 	}, [user]);
 
 	const getUserProductList = async () => {
-		// setLoading(true);
-		// const { data } = await axios.get(
-		// 	"/api/products?email=" + user?.primaryEmailAddress?.emailAddress
-		// );
-		// console.log(data);
-		// setLoading(false);
-		// setListing(data.result);
-		setListing(productList);
+		setLoading(true);
+		const { data } = await axios.get(
+			"/api/products?email=" + user?.primaryEmailAddress?.emailAddress
+		);
+		console.log(data);
+		setLoading(false);
+		setListing(data.result);
+		// setListing(productList);
 	};
 
 	return (

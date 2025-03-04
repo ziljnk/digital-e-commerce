@@ -9,7 +9,7 @@ import RemoveFromCart from "./RemoveFromCart.jsx";
 const CartProductItem = ({ product }) => {
 	const { cart, setCart } = useContext(CartContext);
 	const removeItem = async () => {
-		// const result = await axios.delete("/api/cart?recordId=" + product?.id);
+		const result = await axios.delete("/api/cart?recordId=" + product?.id);
 		toast.success("Item removed");
 
 		const cartList = cart.filter((cartItem) => cartItem.id !== product.id);

@@ -5,27 +5,28 @@ import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { CartContext } from "./_context/CartContext.jsx";
 import Products from "./_mockData/Products";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 function Provider({ children }) {
 	const [cart, setCart] = useState([]);
-	// const { user } = useUser();
-
-	// useEffect(() => {
-	// 	user && checkIsNewUser();
-	//  user && getCartItem();
-	// }, [user]);
-
-	// const checkIsNewUser = async () => {
-	// 	const result = await axios.post("/api/user", {
-	// 		user: user,
-	// 	});
-
-	// 	console.log(result.data);
-	// };
+	const { user } = useUser();
 
 	useEffect(() => {
-		setCart([Products[0], Products[1], Products[2]]);
-	}, []);
+		user && checkIsNewUser();
+		user && getCartItem();
+	}, [user]);
+
+	const checkIsNewUser = async () => {
+		const result = await axios.post("/api/user", {
+			user: user,
+		});
+
+		console.log(result.data);
+	};
+
+	// useEffect(() => {
+	// 	setCart([Products[0], Products[1], Products[2]]);
+	// }, []);
 
 	const getCartItem = async () => {
 		const result = await axios.get(
@@ -38,8 +39,14 @@ function Provider({ children }) {
 	return (
 		<div>
 			<CartContext.Provider value={{ cart, setCart }}>
-				<Header />
-				<div>{children}</div>
+				<PayPalScriptProvider
+					options={{
+						clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+					}}
+				>
+					<Header />
+					<div>{children}</div>
+				</PayPalScriptProvider>
 			</CartContext.Provider>
 		</div>
 	);
