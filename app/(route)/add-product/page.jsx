@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import ImageUpload from "./_components/ImageUpload.jsx";
 import {
@@ -65,7 +66,7 @@ const AddProduct = () => {
 
 	return (
 		<div className="mt-10">
-			<h2 className="font-3xl font-bold ">Add New Product</h2>
+			<h2 className="text-3xl font-bold ">Add New Product</h2>
 			<p>Start adding product details to sell your item.</p>
 
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
@@ -76,8 +77,12 @@ const AddProduct = () => {
 						}
 					/>
 					<div>
-						<h4>Upload File which you want to sell</h4>
+						<Label htmlFor="file">
+							Upload File which you want to sell
+						</Label>
 						<Input
+							id="file"
+							className="mt-2"
 							name="file"
 							type="file"
 							onChange={(e) =>
@@ -89,8 +94,10 @@ const AddProduct = () => {
 						/>
 					</div>
 					<div>
-						<h4>Message to User</h4>
+						<Label htmlFor="message">Message to User</Label>
 						<Textarea
+							id="message"
+							className="mt-2"
 							name="message"
 							placeholder="Write Thank You Message To User"
 							onChange={(e) =>
@@ -101,8 +108,10 @@ const AddProduct = () => {
 				</div>
 				<div className="flex flex-col gap-5">
 					<div>
-						<h4>Product Title</h4>
+						<Label htmlFor="title">Product Title</Label>
 						<Input
+							id="title"
+							className="mt-2"
 							name="title"
 							placeholder="Ex. UI Kit in Figma"
 							onChange={(e) =>
@@ -111,8 +120,10 @@ const AddProduct = () => {
 						/>
 					</div>
 					<div>
-						<h4>Price</h4>
+						<Label htmlFor="price">Price</Label>
 						<Input
+							id="price"
+							className="mt-2"
 							type="number"
 							name="price"
 							placeholder="Ex. $99"
@@ -122,13 +133,13 @@ const AddProduct = () => {
 						/>
 					</div>
 					<div>
-						<h4>Category</h4>
+						<Label>Category</Label>
 						<Select
 							onValueChange={(value) =>
 								handleInputChange("category", value)
 							}
 						>
-							<SelectTrigger className="w-[180px]">
+							<SelectTrigger className="w-[180px] mt-2">
 								<SelectValue placeholder="Select Category" />
 							</SelectTrigger>
 							<SelectContent>
@@ -141,8 +152,10 @@ const AddProduct = () => {
 						</Select>
 					</div>
 					<div>
-						<h4>Description</h4>
+						<Label htmlFor="description">Product Description</Label>
 						<Textarea
+							id="description"
+							className="mt-2"
 							name="description"
 							placeholder="Add product description"
 							onChange={(e) =>
@@ -151,8 +164,9 @@ const AddProduct = () => {
 						/>
 					</div>
 					<div>
-						<h4>About Product (Optional)</h4>
+						<Label htmlFor="about-product">About Product</Label>
 						<Textarea
+							className="mt-2"
 							name="about"
 							id="about-product"
 							placeholder="Add product Information"
@@ -162,11 +176,9 @@ const AddProduct = () => {
 						/>
 					</div>
 					<Button onClick={onAddProductBtnClick} disabled={loading}>
-						{loading ? (
+						{loading ?
 							<Loader2Icon className="animate-spin" />
-						) : (
-							"Add Product"
-						)}
+						:	"Add Product"}
 					</Button>
 				</div>
 			</div>

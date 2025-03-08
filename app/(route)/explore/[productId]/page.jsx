@@ -18,7 +18,7 @@ import AddToCartBtn from "@/app/_components/AddToCartBtn.jsx";
 
 const ProductDetail = () => {
 	const { productId } = useParams();
-	const [productDetail, setProductDetail] = useState(Products[0]);
+	const [productDetail, setProductDetail] = useState();
 	const getProductDetail = async () => {
 		const result = await axios.get("/api/products?id=" + productId);
 		console.log(result.data);

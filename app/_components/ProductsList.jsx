@@ -22,7 +22,7 @@ const ProductsList = () => {
 
 	return (
 		<div>
-			<h2 className="font-bold text-lg flex justify-between items-center">
+			<h2 className="font-bold text-3xl flex justify-between items-center">
 				Featured
 				<span>
 					<Link href={"/explore"}>

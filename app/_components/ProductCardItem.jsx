@@ -20,7 +20,7 @@ const ProductCardItem = ({ product, editable = false, user, purchased }) => {
 						alt={product.title}
 						width={400}
 						height={300}
-						className="h-[180px] object-cover"
+						className="h-[300px] object-fill w-full"
 					/>
 					<div>
 						<h2 className="font-bold text-sm md:text-xl line-clamp-1">
