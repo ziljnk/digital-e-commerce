@@ -4,6 +4,7 @@ import { Funnel_Display } from "next/font/google";
 import Provider from "./provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
 	title: "Create Next App",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
 				<body className={AppFont.className}>
 					<Provider>{children}</Provider>
 					<Toaster />
+					<Analytics />
 				</body>
 			</html>
 		</ClerkProvider>
