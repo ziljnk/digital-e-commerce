@@ -26,20 +26,20 @@ function Header() {
 	];
 	return (
 		<div className="flex p-4 px-10 md:px-32 lg:px-48 bg-primary border-b-4 border-black justify-between items-center">
-			<Image
-				src="/logo.webp"
-				width={100}
-				height={100}
-				className="px-2 p-1"
-				alt="logo growsense"
-			/>
+			<Link href={"/"}>
+				<Image
+					src="/logo.webp"
+					width={100}
+					height={100}
+					className="px-2 p-1"
+					alt="logo growsense"
+				/>
+			</Link>
 
 			<ul className="hidden md:flex gap-5 px-2 p-1">
 				{menuList.map((menu, index) => (
 					<Link href={menu.path} key={index}>
-						<li className=" px-2 p-1 cursor-pointer hover:border-2 hover:border-white">
-							{menu.name}
-						</li>
+						<li className="px-2 p-1 cursor-pointer">{menu.name}</li>
 					</Link>
 				))}
 			</ul>

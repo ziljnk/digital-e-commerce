@@ -8,7 +8,7 @@ const Dashboard = () => {
 	return (
 		<div className="mt-36">
 			<h2 className="font-bold text-2xl">Dashboard</h2>
-			<Tabs defaultValue="account" className="mt-5">
+			<Tabs defaultValue="listing" className="mt-5">
 				<TabsList>
 					<TabsTrigger value="listing">Listing</TabsTrigger>
 					<TabsTrigger value="analytics">Analytics</TabsTrigger>

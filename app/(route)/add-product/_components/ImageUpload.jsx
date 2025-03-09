@@ -3,16 +3,17 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
+import { FileUpload } from "@/components/ui/file-upload";
 
 const ImageUpload = ({ onImageSelect }) => {
 	const [image, setImage] = useState(null);
 	const [dragging, setDragging] = useState(false);
 
-	const handleFileChange = (event) => {
-		const file = event.target.files[0];
+	const handleFileChange = (files) => {
+		const file = files[0];
 		if (file) {
 			previewImage(file);
-			onImageSelect(event);
+			onImageSelect(file);
 		}
 	};
 
@@ -46,40 +47,52 @@ const ImageUpload = ({ onImageSelect }) => {
 
 	return (
 		<div>
-			<Label htmlFor="imageUpload">Upload Product Image</Label>
-			<Input
-				type="file"
-				id="imageUpload"
-				name="image"
-				className="hidden"
-				onChange={handleFileChange}
-				accept="image/*"
-			/>
-			<label htmlFor="imageUpload">
-				<div
-					className={`p-10 flex justify-center items-center cursor-pointer border-dashed border-2 border-black bg-slate-200 mt-2 transition-all ${dragging ? "bg-gray-300" : ""}`}
-					onDragOver={handleDragOver}
-					onDragLeave={handleDragLeave}
-					onDrop={handleDrop}
-				>
-					{image ?
-						<Image
-							src={image}
-							width={300}
-							height={300}
-							className="object-contain h-[200px]"
-							alt="Selected image"
-						/>
-					:	<Image
-							src="/image.png"
-							alt="Image upload placeholder"
-							width={100}
-							height={100}
-						/>
-					}
-				</div>
-			</label>
+			<FileUpload onChange={handleFileChange} />
+			{image && (
+				<Image
+					src={image}
+					width={300}
+					height={300}
+					className="object-contain h-[200px]"
+					alt="Selected image"
+				/>
+			)}
 		</div>
+		// <div>
+		// 	<Label htmlFor="imageUpload">Upload Product Image</Label>
+		// 	<Input
+		// 		type="file"
+		// 		id="imageUpload"
+		// 		name="image"
+		// 		className="hidden"
+		// 		onChange={handleFileChange}
+		// 		accept="image/*"
+		// 	/>
+		// 	<label htmlFor="imageUpload">
+		// 		<div
+		// 			className={`p-10 flex justify-center items-center cursor-pointer border-dashed border-2 border-black bg-slate-200 mt-2 transition-all ${dragging ? "bg-gray-300" : ""}`}
+		// 			onDragOver={handleDragOver}
+		// 			onDragLeave={handleDragLeave}
+		// 			onDrop={handleDrop}
+		// 		>
+		// 			{image ?
+		// <Image
+		// 	src={image}
+		// 	width={300}
+		// 	height={300}
+		// 	className="object-contain h-[200px]"
+		// 	alt="Selected image"
+		// />
+		// 			:	<Image
+		// 					src="/image.png"
+		// 					alt="Image upload placeholder"
+		// 					width={100}
+		// 					height={100}
+		// 				/>
+		// 			}
+		// 		</div>
+		// 	</label>
+		// </div>
 	);
 };
 
