@@ -10,16 +10,15 @@ const Hero = () => {
 		<div className="h-full relative w-full overflow-hidden bg-slate-900 flex flex-col items-center justify-center">
 			<div className="absolute inset-0 w-full h-full bg-slate-900 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
 
-			<Boxes />
+			{/* <Boxes /> */}
 
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-20 z-[999] pointer-events-none max-w-[80%]">
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-20 pb-10 z-[999] pointer-events-none max-w-[80%]">
 				<div>
 					<h2 className="font-extrabold text-5xl text-white">
 						Unlock the{" "}
-						<Highlight className="text-black dark:text-white">
-							Secrets of Magic
-						</Highlight>{" "}
-						– Learn, Perform, Amaze!
+						{/* <Highlight className="text-black dark:text-white"> */}
+						Secrets of Magic
+						{/* </Highlight>{" "} */}– Learn, Perform, Amaze!
 					</h2>
 					<p className="text-gray-200 mt-3">
 						Discover mind-blowing magic tricks, high-quality card

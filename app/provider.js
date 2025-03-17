@@ -4,7 +4,6 @@ import Header from "./_components/Header";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { CartContext } from "./_context/CartContext.jsx";
-import Products from "./_mockData/Products";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 function Provider({ children }) {
@@ -23,10 +22,6 @@ function Provider({ children }) {
 
 		console.log(result.data);
 	};
-
-	// useEffect(() => {
-	// 	setCart([Products[0], Products[1], Products[2]]);
-	// }, []);
 
 	const getCartItem = async () => {
 		const result = await axios.get(

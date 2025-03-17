@@ -1,4 +1,3 @@
-import localFont from "next/font/local";
 import "./globals.css";
 import { Funnel_Display } from "next/font/google";
 import Provider from "./provider";
@@ -16,14 +15,16 @@ const AppFont = Funnel_Display({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
 	return (
-		<ClerkProvider>
-			<html lang="en">
-				<body className={AppFont.className}>
-					<Provider>{children}</Provider>
-					<Toaster />
-					<Analytics />
-				</body>
-			</html>
-		</ClerkProvider>
+		<>
+			<ClerkProvider>
+				<html lang="en">
+					<body className={AppFont.className}>
+						<Provider>{children}</Provider>
+						<Toaster />
+						<Analytics />
+					</body>
+				</html>
+			</ClerkProvider>
+		</>
 	);
 }

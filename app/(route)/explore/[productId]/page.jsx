@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import SimilarProduct from "./_components/SimilarProduct.jsx";
+import ImageCarousel from "@/components/ui/image-carousel";
 import {
 	Accordion,
 	AccordionContent,
@@ -20,14 +21,43 @@ const ProductDetail = () => {
 	const { productId } = useParams();
 	const [productDetail, setProductDetail] = useState();
 	const getProductDetail = async () => {
-		const result = await axios.get("/api/products?id=" + productId);
-		console.log(result.data);
-		setProductDetail(result.data);
+		// const result = await axios.get("/api/products?id=" + productId);
+		// console.log(result.data);
+		// setProductDetail(result.data);
+		setProductDetail(Products[0]);
 	};
 
 	useEffect(() => {
 		getProductDetail();
 	}, []);
+
+	const productImages = [
+		{
+			id: 1,
+			image: "https://plus.unsplash.com/premium_photo-1718204436526-277f9f34607c?q=80&w=1818&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+			title: "Item 1",
+		},
+		{
+			id: 2,
+			image: "https://images.unsplash.com/photo-1718717722247-26f4c6c09192?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
+			title: "Item 2",
+		},
+		{
+			id: 3,
+			image: "https://plus.unsplash.com/premium_photo-1718570262641-54c3ea3142e9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+			title: "Item 3",
+		},
+		{
+			id: 4,
+			image: "https://images.unsplash.com/photo-1718524767488-10ee93e05e9c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+			title: "Item 4",
+		},
+		{
+			id: 5,
+			image: "https://images.unsplash.com/photo-1718524767488-10ee93e05e9c?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+			title: "Item 4",
+		},
+	];
 
 	return (
 		productDetail && (
@@ -35,15 +65,15 @@ const ProductDetail = () => {
 				<h2>BACK</h2>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 mt-6 gap-10">
-					<Card className="flex items-center justify-center max-h-[400px]">
-						<Image
+					{/* <Image
 							src={productDetail?.imageUrl}
 							alt={productDetail.title}
 							width={400}
 							height={400}
 							className="h-[400px] w-full object-contain"
-						/>
-					</Card>
+						/> */}
+
+					<ImageCarousel items={productImages} />
 
 					<div className="flex flex-col gap-5">
 						<div>

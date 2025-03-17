@@ -75,11 +75,32 @@ export default {
 						transform: "translate(calc(-50% - 0.5rem))",
 					},
 				},
+				shine: {
+					"0%": { "background-position": "100%" },
+					"100%": { "background-position": "-100%" },
+				},
+				marquee: {
+					from: { transform: "translateX(0%)" },
+					to: { transform: "translateX(-50%)" },
+				},
+				fadeIn: {
+					from: { opacity: 0 },
+					to: { opacity: 1 },
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
 				scroll: "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+				marquee: "marquee 15s linear infinite",
+				fadeIn: "fadeIn 0.5s ease-in",
+			},
+			transitionTimingFunction: {
+				slow: "cubic-bezier(.405, 0, .025, 1)",
+				"minor-spring": "cubic-bezier(0.18,0.89,0.82,1.04)",
+			},
+			translate: {
+				101: "101%",
 			},
 		},
 	},
