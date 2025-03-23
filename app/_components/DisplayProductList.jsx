@@ -16,7 +16,7 @@ const DisplayProductList = ({ productList, purchased = false }) => {
 						purchased={purchased}
 					/>
 				))
-			:	[1, 2, 3, 4, 5, 6].map((_, index) => (
+			:	[1, 2, 3, 4, 5, 6, 7].map((_, index) => (
 					<div
 						key={index}
 						className="h-[200px] w-full bg-slate-200 rounded-lg animate-pulse"
