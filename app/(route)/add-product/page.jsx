@@ -38,12 +38,15 @@ const AddProduct = () => {
 		setFormData({
 			userEmail: user?.primaryEmailAddress?.emailAddress,
 		});
+		console.log("user", user);
 	}, [user]);
 	const handleInputChange = (fieldName, fieldValue) => {
 		setFormData((prev) => ({
 			...prev,
 			[fieldName]: fieldValue,
 		}));
+
+		console.log("formData", formData);
 	};
 	const onAddProductBtnClick = async () => {
 		setLoading(true);
@@ -60,7 +63,7 @@ const AddProduct = () => {
 		console.log("result", result);
 		if (result.status === 200) {
 			toast.success("Product Added Successfully!");
-			router.push("/dashboard");
+			// router.push("/dashboard");
 		}
 	};
 

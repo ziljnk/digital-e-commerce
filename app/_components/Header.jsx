@@ -20,13 +20,17 @@ function Header() {
 			name: "Store",
 			path: "/store",
 		},
-		{
-			name: "Explore",
-			path: "/explore",
-		},
+		// {
+		// 	name: "Explore",
+		// 	path: "/explore",
+		// },
 		{
 			name: "Blog",
 			path: "/blog",
+		},
+		{
+			name: "About",
+			path: "/about",
 		},
 	];
 	return (

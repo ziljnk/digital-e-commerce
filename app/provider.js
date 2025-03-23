@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Header from "./_components/Header";
+import Footer from "./_components/Footer";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { CartContext } from "./_context/CartContext.jsx";
@@ -40,7 +41,8 @@ function Provider({ children }) {
 					}}
 				>
 					<Header />
-					<div>{children}</div>
+					<div className="pt-[80px]">{children}</div>
+					<Footer />
 				</PayPalScriptProvider>
 			</CartContext.Provider>
 		</div>
