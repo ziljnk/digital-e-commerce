@@ -200,7 +200,7 @@ const FuzzyText = ({
 		hoverIntensity,
 	]);
 
-	return <canvas ref={canvasRef} />;
+	return <canvas ref={canvasRef} className="w-full" />;
 };
 
 export default FuzzyText;

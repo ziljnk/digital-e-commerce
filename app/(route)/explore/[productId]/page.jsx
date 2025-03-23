@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import SimilarProduct from "./_components/SimilarProduct.jsx";
 import ImageCarousel from "@/components/ui/image-carousel";
+import AnimatedBackButton from "@/app/_components/BackButton.jsx";
 import {
 	Accordion,
 	AccordionContent,
@@ -61,18 +62,10 @@ const ProductDetail = () => {
 
 	return (
 		productDetail && (
-			<div className="mt-10">
-				<h2>BACK</h2>
+			<div>
+				<AnimatedBackButton />
 
-				<div className="grid grid-cols-1 md:grid-cols-2 mt-6 gap-10">
-					{/* <Image
-							src={productDetail?.imageUrl}
-							alt={productDetail.title}
-							width={400}
-							height={400}
-							className="h-[400px] w-full object-contain"
-						/> */}
-
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 					<ImageCarousel items={productImages} />
 
 					<div className="flex flex-col gap-5">

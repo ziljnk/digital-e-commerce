@@ -36,11 +36,6 @@ const ProductsList = () => {
 					text={title.text}
 					image={title.image}
 				/>
-				{/* <span>
-					<Link href={"/explore"}>
-						<Button>View All</Button>
-					</Link>
-				</span> */}
 			</div>
 
 			<DisplayProductList productList={productList} />

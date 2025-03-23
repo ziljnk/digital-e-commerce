@@ -4,7 +4,7 @@ import FuzzyText from "@/components/ui/text/fuzzy";
 
 const ErrorPage = () => {
 	return (
-		<div className="w-[100vw] h-[100vh] fixed top-0 left-0 flex justify-center items-center bg-[#060606]">
+		<div className="w-[100vw] h-[100vh] px-48 fixed top-0 left-0 flex justify-center items-center bg-[#060606]">
 			<FuzzyText
 				baseIntensity={0.5}
 				hoverIntensity={1}
