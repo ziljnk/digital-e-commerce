@@ -25,7 +25,7 @@ const CartList = ({ children }) => {
 
 	return (
 		<Sheet>
-			<SheetTrigger>{children}</SheetTrigger>
+			<SheetTrigger asChild>{children}</SheetTrigger>
 			<SheetContent>
 				<SheetHeader>
 					<SheetTitle>Cart ({cart.length})</SheetTitle>

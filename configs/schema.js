@@ -1,7 +1,7 @@
 import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
-	id: integer().primaryKey().generatedAlwaysAsIdentity(),
+	id: varchar({ length: 255 }).notNull().unique().primaryKey(),
 	name: varchar({ length: 255 }).notNull(),
 	image: varchar(),
 	email: varchar({ length: 255 }).notNull().unique(),

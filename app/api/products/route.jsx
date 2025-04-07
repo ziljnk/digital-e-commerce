@@ -1,12 +1,9 @@
 import { NextResponse } from "next/server";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "@/configs/firebaseConfig.js";
 import { db } from "@/configs/db";
 import { productsTable, usersTable } from "@/configs/schema.js";
 import { and, desc, eq, getTableColumns } from "drizzle-orm";
 import { currentUser } from "@clerk/nextjs/server";
 import cloudinary from "cloudinary";
-import { resolve } from "styled-jsx/css";
 
 cloudinary.v2.config({
 	cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -17,70 +14,50 @@ cloudinary.v2.config({
 export async function POST(req) {
 	const formData = await req.formData();
 	const image = formData.get("image");
-	// const file = formData.get("file");
-	// const data = JSON.parse(formData.get("data"));
-	console.log("image", image);
-	return NextResponse.json({ result: image });
-	// const buffer = Buffer.from(await image.arrayBuffer());
+	const file = formData.get("file");
+	const data = JSON.parse(formData.get("data"));
+	const buffer = Buffer.from(await image.arrayBuffer());
 
-	// console.log("image", image);
-	// console.log(image, file, data);
+	const imageUrl = await new Promise((resolve, reject) => {
+		const uploadStream = cloudinary.v2.uploader.upload_stream(
+			{
+				folder: `growsense/product-images/${data?.userId}`,
+				public_id: Date.now().toString(),
+				resource_type: "image",
+			},
+			(error, result) => {
+				if (error) {
+					reject(
+						NextResponse.json(
+							{ error: "Upload image failed" },
+							{ status: 500 }
+						)
+					);
+				} else {
+					resolve(result.secure_url);
+				}
+			}
+		);
 
-	// const imageName = Date.now() + ".png";
-	// const storageRef = ref(storage, "product-image/" + imageName);
-	// await uploadBytes(storageRef, image).then((snapshot) => {
-	// 	console.log("file uploaded");
-	// });
-	// const imageUrl = await getDownloadURL(storageRef);
+		uploadStream.end(buffer);
+	});
 
-	// const fileName = Date.now().toString();
-	// const storageFileRef = ref(storage, "product-file/" + fileName);
-	// await uploadBytes(storageFileRef, file).then((snapshot) => {
-	// 	console.log("file uploaded");
-	// });
-	// const fileUrl = await getDownloadURL(storageFileRef);
+	const result = await db
+		.insert(productsTable)
+		.values({
+			title: data?.title,
+			category: data?.category,
+			description: data?.description,
+			fileUrl: "fileUrl",
+			imageUrl: imageUrl,
+			price: data?.price,
+			about: data?.about,
+			message: data?.message,
+			createdBy: data?.userEmail,
+		})
+		.returning(productsTable);
 
-	// console.log("imageUrl", imageUrl);
-	// console.log("fileUrl", fileUrl);
-
-	// const result = await db
-	// 	.insert(productsTable)
-	// 	.values({
-	// 		title: data?.title,
-	// 		category: data?.category,
-	// 		description: data?.description,
-	// 		fileUrl: fileUrl,
-	// 		imageUrl: imageUrl,
-	// 		price: data?.price,
-	// 		about: data?.about,
-	// 		message: data?.message,
-	// 		createdBy: data?.userEmail,
-	// 	})
-	// 	.returning(productsTable);
-
-	// return new Promise((resolve, reject) => {
-	// 	const uploadStream = cloudinary.v2.uploader.upload_stream(
-	// 		{
-	// 			folder: "growsense/product-images",
-	// 			public_id: Date.now().toString(),
-	// 			resource_type: "image",
-	// 		},
-	// 		(error, result) => {
-	// 			if (error) {
-	// 				reject(
-	// 					NextResponse.json(
-	// 						{ error: "Upload failed" },
-	// 						{ status: 500 }
-	// 					)
-	// 				);
-	// 			} else {
-	// 				resolve(NextResponse.json({ url: result.secure_url }));
-	// 			}
-	// 		}
-	// 	);
-
-	// 	uploadStream.end(buffer);
-	// });
+	return NextResponse.json(result);
 }
 
 export async function GET(req) {

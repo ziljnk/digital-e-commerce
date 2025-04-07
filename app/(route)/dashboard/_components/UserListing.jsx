@@ -22,7 +22,6 @@ function UserListing() {
 		const { data } = await axios.get(
 			"/api/products?email=" + user?.primaryEmailAddress?.emailAddress
 		);
-		console.log(data);
 		setLoading(false);
 		setListing(data.result);
 		// setListing(productList);

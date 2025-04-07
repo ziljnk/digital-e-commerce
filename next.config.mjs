@@ -5,6 +5,7 @@ const nextConfig = {
 			"firebasestorage.googleapis.com",
 			"img.clerk.com",
 			"images.unsplash.com",
+			"api.microlink.io",
 		],
 	},
 };

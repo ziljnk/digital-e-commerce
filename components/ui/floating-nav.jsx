@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Menu, Search, User, ShoppingCart, X } from "lucide-react";
+import { Menu, User, ShoppingCart, X } from "lucide-react";
 import CartList from "@/app/_components/CartList";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { UserButton, useUser } from "@clerk/nextjs";
+import SearchButton from "@/app/_components/SearchButton";
 
 export default function FloatingNavbar({ menuList }) {
 	const { scrollY } = useScroll();
@@ -15,6 +17,11 @@ export default function FloatingNavbar({ menuList }) {
 	const pathName = usePathname();
 	const [isMenuOpenMobile, setIsMenuOpenMobile] = useState(false);
 	const router = useRouter();
+	const { user } = useUser();
+
+	useEffect(() => {
+		console.log("currentUser", user);
+	}, [user]);
 
 	useEffect(() => {
 		const unsubscribe = scrollY.on("change", (latest) => {
@@ -39,7 +46,10 @@ export default function FloatingNavbar({ menuList }) {
 					: isScrolled ? 60
 					: 80,
 				boxShadow:
-					isScrolled ? "0 4px 20px rgba(0, 0, 0, 0.1)" : "none",
+					isScrolled ?
+						"shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]"
+					:	"none",
+				border: isScrolled ? "1px solid rgba(0, 0, 0, 0.3)" : "none",
 				width:
 					isMenuOpenMobile ? "100%"
 					: isScrolled ? "50%"
@@ -61,13 +71,13 @@ export default function FloatingNavbar({ menuList }) {
 			}}
 			transition={{
 				type: "spring",
-				stiffness: 300,
-				damping: 20,
+				stiffness: 500,
+				damping: 30,
 			}}
 		>
 			<motion.div
 				className={cn(
-					"flex items-center justify-between w-full",
+					"flex items-center justify-between w-full gap-10",
 					isScrolled ? "px-2 md:px-5" : "px-3 lg:px-60"
 				)}
 				animate={{
@@ -76,7 +86,7 @@ export default function FloatingNavbar({ menuList }) {
 				}}
 				transition={{ duration: 0.3 }}
 			>
-				<div className="flex items-center justify-center gap-5 w-full">
+				<div className="flex items-center justify-between gap-5 w-full">
 					<Button
 						onClick={handleOpenMenuMobile}
 						variant="ghost"
@@ -88,26 +98,26 @@ export default function FloatingNavbar({ menuList }) {
 						:	<Menu className="h-5 w-5" />}
 						<span className="sr-only">Toggle menu</span>
 					</Button>
-					<motion.div
-						className="text-xl font-bold flex-1 lg:flex-none cursor-pointer"
+					<motion.a
+						className="text-xl font-bold flex-1 lg:flex-none"
 						animate={{
 							fontSize:
 								isMenuOpenMobile ? "1.25rem"
 								: isScrolled ? "1.1rem"
-								: "1.25rem",
+								: "1.55rem",
 						}}
 						transition={{ duration: 0.3 }}
 						initial={false}
-						onClick={() => router.push("/")}
+						href="/"
 					>
 						GrowSense
-					</motion.div>
+					</motion.a>
 					<nav className="lg:flex items-center gap-5 text-sm hidden">
 						{menuList.map((item, index) => (
 							<Link
 								href={item.path}
 								key={index}
-								className={`font-medium transition-colors hover:bg-[#f5f5f5] px-2 py-1 rounded-lg ${pathName === item.path && "bg-[#f5f5f5]"} }`}
+								className={`font-medium transition-colors hover:bg-[#f5f5f5] px-2 py-1 rounded-lg ${pathName === item.path && "bg-[#d9d9d9]"} }`}
 							>
 								{item.name}
 							</Link>
@@ -122,13 +132,15 @@ export default function FloatingNavbar({ menuList }) {
 					} items-center gap-4`}
 				>
 					<Button variant="ghost" size="icon">
-						<Search className="h-5 w-5" />
-						<span className="sr-only">Search</span>
+						{user ?
+							<UserButton />
+						:	<>
+								<User className="h-5 w-5" />
+								<span className="sr-only">User</span>
+							</>
+						}
 					</Button>
-					<Button variant="ghost" size="icon">
-						<User className="h-5 w-5" />
-						<span className="sr-only">User</span>
-					</Button>
+					<SearchButton />
 					<CartList>
 						<Button variant="ghost" size="icon">
 							<ShoppingCart className="h-5 w-5" />

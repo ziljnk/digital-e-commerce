@@ -14,14 +14,14 @@ function Provider({ children }) {
 	useEffect(() => {
 		user && checkIsNewUser();
 		user && getCartItem();
+
+		console.log("user", user);
 	}, [user]);
 
 	const checkIsNewUser = async () => {
 		const result = await axios.post("/api/user", {
 			user: user,
 		});
-
-		console.log(result.data);
 	};
 
 	const getCartItem = async () => {
@@ -29,21 +29,20 @@ function Provider({ children }) {
 			"/api/cart?email=" + user?.primaryEmailAddress?.emailAddress
 		);
 		setCart(result.data);
-		console.log(result);
 	};
 
 	return (
 		<div>
 			<CartContext.Provider value={{ cart, setCart }}>
-				<PayPalScriptProvider
+				{/* <PayPalScriptProvider
 					options={{
 						clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
 					}}
-				>
-					<Header />
-					<div className="pt-[80px]">{children}</div>
-					<Footer />
-				</PayPalScriptProvider>
+				> */}
+				<Header />
+				<div className="pt-[80px]">{children}</div>
+				<Footer />
+				{/* </PayPalScriptProvider> */}
 			</CartContext.Provider>
 		</div>
 	);

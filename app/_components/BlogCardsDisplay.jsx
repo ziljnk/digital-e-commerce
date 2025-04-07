@@ -18,7 +18,7 @@ const BlogCardsDisplay = ({ page }) => {
 				</DoubleUnderline>
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-5">
 					{[1, 2, 3].map((_, index) => (
-						<BlogCard key={index} />
+						<BlogCard key={index} blogInformation={Blogs[index]} />
 					))}
 				</div>
 			</div>
@@ -40,7 +40,7 @@ const BlogCardsDisplay = ({ page }) => {
 	};
 
 	return (
-		<div className={page === "blog" && "container mx-auto"}>
+		<div className={page === "blog" ? "container mx-auto" : ""}>
 			<ZoomOutText text="Blogs Posts" />
 			{displayBlogPosts()}
 		</div>

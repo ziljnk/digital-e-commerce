@@ -32,12 +32,13 @@ const AddProduct = () => {
 	];
 	const [formData, setFormData] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const router = useRouter();
 	const { user } = useUser();
 	useEffect(() => {
 		setFormData({
 			userEmail: user?.primaryEmailAddress?.emailAddress,
+			userId: user?.id,
 		});
+
 		console.log("user", user);
 	}, [user]);
 	const handleInputChange = (fieldName, fieldValue) => {
@@ -45,14 +46,11 @@ const AddProduct = () => {
 			...prev,
 			[fieldName]: fieldValue,
 		}));
-
-		console.log("formData", formData);
 	};
 	const onAddProductBtnClick = async () => {
 		setLoading(true);
 		const formDataObject = new FormData();
 		formDataObject.append("image", formData.image);
-		formDataObject.append("file", formData.file);
 		formDataObject.append("data", JSON.stringify(formData));
 
 		const result = await axios.post("/api/products", formDataObject, {
@@ -60,7 +58,6 @@ const AddProduct = () => {
 		});
 
 		setLoading(false);
-		console.log("result", result);
 		if (result.status === 200) {
 			toast.success("Product Added Successfully!");
 			// router.push("/dashboard");
@@ -75,27 +72,10 @@ const AddProduct = () => {
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
 				<div className="flex flex-col gap-5">
 					<ImageUpload
-						onImageSelect={(e) =>
-							handleInputChange(e.target.name, e.target.files[0])
+						onImageSelect={(file) =>
+							handleInputChange("image", file)
 						}
 					/>
-					<div>
-						<Label htmlFor="file">
-							Upload File which you want to sell
-						</Label>
-						<Input
-							id="file"
-							className="mt-2"
-							name="file"
-							type="file"
-							onChange={(e) =>
-								handleInputChange(
-									e.target.name,
-									e.target.files[0]
-								)
-							}
-						/>
-					</div>
 					<div>
 						<Label htmlFor="message">Message to User</Label>
 						<Textarea

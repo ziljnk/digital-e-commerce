@@ -6,11 +6,11 @@ import TextRevealImage from "@/components/ui/text/reveal-image";
 const Testimonials = () => {
 	const images = [
 		{
-			src: "https://images.unsplash.com/photo-1575995872537-3793d29d972c?w=200&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+			src: "/testimonial-title/card-k.jpg",
 			alt: "Image 1",
 		},
 		{
-			src: "https://images.unsplash.com/photo-1579762715118-a6f1d4b934f1?w=200&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+			src: "/testimonial-title/card-q.jpg",
 			alt: "Image 2",
 		},
 	];

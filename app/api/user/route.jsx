@@ -17,6 +17,7 @@ export async function POST(req) {
 		const result = await db
 			.insert(usersTable)
 			.values({
+				id: user?.id,
 				name: user?.fullName,
 				email: user?.primaryEmailAddress.emailAddress,
 				image: user?.imageUrl,

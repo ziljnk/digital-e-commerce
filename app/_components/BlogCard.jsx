@@ -14,7 +14,11 @@ export function BlogCard({ imageIncluded = false, blogInformation }) {
 					logo={blogInformation.logo}
 					link={blogInformation.link}
 				/>
-			:	<CursorTracker />}
+			:	<CursorTracker
+					title={blogInformation.title}
+					description={blogInformation.title}
+				/>
+			}
 		</>
 	);
 }

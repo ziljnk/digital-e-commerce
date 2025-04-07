@@ -3,7 +3,7 @@ import { useCallback, useRef } from "react";
 import { useMousePosition } from "@/app/hooks/useMousePosition";
 import Link from "next/link";
 
-export default function CursorTracker() {
+export default function CursorTracker({ title, description }) {
 	const divRef = useRef(null);
 	const infoRef = useRef(null);
 
@@ -27,13 +27,11 @@ export default function CursorTracker() {
 		>
 			{/* Actual content */}
 			<h1 className="mb-4 text-3xl font-semibold leading-none">
-				Elevate your design with{" "}
-				<span className="underline decoration-wavy">Animata</span>
+				{/* Elevate your design with{" "}
+				<span className="underline decoration-wavy">Animata</span> */}
+				{title}
 			</h1>
-			<div className="mb-8">
-				Move your mouse over the box to reveal the text and the cursor
-				position.
-			</div>
+			<div className="mb-8">{description}</div>
 
 			{/* Cursor tracker */}
 			<div
