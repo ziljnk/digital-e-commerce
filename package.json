@@ -3,8 +3,9 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
+		"drizzle:push": "npx drizzle-kit push",
 		"dev": "next dev",
-		"build": "next build",
+		"build": "npm run drizzle:push && next build",
 		"start": "next start",
 		"lint": "next lint",
 		"email": "email dev"
